@@ -9,20 +9,12 @@ const prose = require('./slice-prose');
 const contributors = require('./resolve-contributors');
 
 const writeToFile = (propertyName, json) => {
-  const data = {
-    html: {
-      elements: {
-        [propertyName]: json,
-      }
-    }
-  };
-
   const dest = path.join(process.cwd(),'packaged/html/elements', `${propertyName}.json`);
   const destDir = path.dirname(dest);
   if (!fs.existsSync(destDir)) {
       fs.mkdirSync(destDir, { recursive: true });
   }
-  fs.writeFileSync(dest, `${JSON.stringify(data, null, 2)}`);
+  fs.writeFileSync(dest, `${JSON.stringify(json, null, 2)}`);
 };
 
 async function buildPageJSON(elementPath) {
